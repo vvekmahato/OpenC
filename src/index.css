@@ -1,0 +1,838 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:wght@400;700&family=Pixelify+Sans:wght@400;700&display=swap');
+
+:root {
+  /* Classic Windows 95 Color Palette */
+  --win-bg: #c0c0c0;
+  --win-desktop: #008080; /* Classic Teal */
+  --win-border-light: #ffffff;
+  --win-border-dark: #808080;
+  --win-border-shadow: #0a0a0a;
+  --win-title-active: #000080; /* Dark Blue */
+  --win-title-active-gradient: linear-gradient(90deg, #000080, #1080d0);
+  --win-title-inactive: #808080;
+  --win-text: #000000;
+  --win-input-bg: #ffffff;
+  --win-selected-bg: #000080;
+  --win-selected-text: #ffffff;
+
+  /* Typography */
+  --font-pixel: 'Pixelify Sans', 'VT323', monospace;
+  --font-monospace: 'Courier Prime', Courier, monospace;
+  --font-sys: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  image-rendering: pixelated;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sys);
+  background-color: var(--win-desktop);
+  color: var(--win-text);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  user-select: none;
+  font-size: 14px;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------
+   WINDOWS 95 3D BEVEL BORDERS
+   ---------------------------------------------------- */
+
+.outset-deep {
+  border: 2px solid;
+  border-top-color: var(--win-border-light);
+  border-left-color: var(--win-border-light);
+  border-right-color: var(--win-border-shadow);
+  border-bottom-color: var(--win-border-shadow);
+  box-shadow: inset 1px 1px 0px var(--win-border-light),
+              inset -1px -1px 0px var(--win-border-dark),
+              1px 1px 0px var(--win-border-shadow);
+}
+
+.inset-deep {
+  border: 2px solid;
+  border-top-color: var(--win-border-dark);
+  border-left-color: var(--win-border-dark);
+  border-right-color: var(--win-border-light);
+  border-bottom-color: var(--win-border-light);
+  box-shadow: inset 1px 1px 0px var(--win-border-shadow),
+              inset -1px -1px 0px #dfdfdf;
+  background-color: var(--win-input-bg);
+}
+
+.border-thin-outset {
+  border: 1px solid;
+  border-top-color: var(--win-border-light);
+  border-left-color: var(--win-border-light);
+  border-right-color: var(--win-border-dark);
+  border-bottom-color: var(--win-border-dark);
+}
+
+.border-thin-inset {
+  border: 1px solid;
+  border-top-color: var(--win-border-dark);
+  border-left-color: var(--win-border-dark);
+  border-right-color: var(--win-border-light);
+  border-bottom-color: var(--win-border-light);
+}
+
+/* ----------------------------------------------------
+   RETRO BUTTONS
+   ---------------------------------------------------- */
+
+.btn-retro {
+  background-color: var(--win-bg);
+  color: var(--win-text);
+  font-family: var(--font-sys);
+  font-size: 13px;
+  padding: 4px 10px;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 2px solid;
+  border-top-color: var(--win-border-light);
+  border-left-color: var(--win-border-light);
+  border-right-color: var(--win-border-shadow);
+  border-bottom-color: var(--win-border-shadow);
+  box-shadow: inset 1px 1px 0px var(--win-border-light),
+              inset -1px -1px 0px var(--win-border-dark);
+}
+
+.btn-retro:active:not(:disabled),
+.btn-retro.active {
+  border-top-color: var(--win-border-shadow);
+  border-left-color: var(--win-border-shadow);
+  border-right-color: var(--win-border-light);
+  border-bottom-color: var(--win-border-light);
+  box-shadow: inset 1px 1px 0px var(--win-border-dark);
+  padding: 5px 9px 3px 11px; /* Slight shift to mimic physical press */
+}
+
+.btn-retro:disabled {
+  color: var(--win-border-dark);
+  text-shadow: 1px 1px 0px var(--win-border-light);
+  cursor: not-allowed;
+}
+
+.btn-retro:focus-visible {
+  outline: 1px dotted var(--win-text);
+  outline-offset: -4px;
+}
+
+/* Close/Control buttons in headers */
+.btn-control {
+  width: 16px;
+  height: 14px;
+  padding: 0;
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 12px;
+  border: 2px solid;
+  border-top-color: var(--win-border-light);
+  border-left-color: var(--win-border-light);
+  border-right-color: var(--win-border-shadow);
+  border-bottom-color: var(--win-border-shadow);
+  box-shadow: inset 1px 1px 0px var(--win-border-light),
+              inset -1px -1px 0px var(--win-border-dark);
+  background-color: var(--win-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-control:active {
+  border-top-color: var(--win-border-shadow);
+  border-left-color: var(--win-border-shadow);
+  border-right-color: var(--win-border-light);
+  border-bottom-color: var(--win-border-light);
+  box-shadow: inset 1px 1px 0px var(--win-border-dark);
+}
+
+/* ----------------------------------------------------
+   WINDOW CONTAINERS
+   ---------------------------------------------------- */
+
+.win-container {
+  background-color: var(--win-bg);
+  position: absolute;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+
+.win-header {
+  background: var(--win-title-active-gradient);
+  color: var(--win-border-light);
+  padding: 3px 4px 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  cursor: move;
+  user-select: none;
+}
+
+.win-header.inactive {
+  background: var(--win-title-inactive);
+  color: #dfdfdf;
+}
+
+.win-header-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.win-header-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.win-body {
+  padding: 8px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: auto;
+}
+
+.win-status-bar {
+  display: flex;
+  gap: 4px;
+  padding: 2px 4px;
+  margin-top: 4px;
+}
+
+.win-status-pane {
+  flex-grow: 1;
+  padding: 2px 6px;
+  font-size: 11px;
+}
+
+/* ----------------------------------------------------
+   DESKTOP SHELL
+   ---------------------------------------------------- */
+
+.desktop-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 120px;
+  height: calc(100vh - 40px);
+}
+
+.desktop-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: 1px dotted transparent;
+  color: var(--win-border-light);
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  padding: 6px;
+  width: 80px;
+}
+
+.desktop-icon-btn:hover {
+  background-color: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.desktop-icon-btn.selected {
+  background-color: var(--win-selected-bg);
+  border-color: var(--win-border-light);
+  color: var(--win-selected-text);
+}
+
+.desktop-icon-img {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-icon-label {
+  word-break: break-word;
+  text-shadow: 1px 1px 1px #000;
+}
+
+/* ----------------------------------------------------
+   TASKBAR & START MENU
+   ---------------------------------------------------- */
+
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: var(--win-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  z-index: 10000;
+  border-top: 2px solid var(--win-border-light);
+  box-shadow: 0 -1px 0 var(--win-border-dark);
+}
+
+.taskbar-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.btn-start {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 3px 8px;
+}
+
+.taskbar-apps {
+  display: flex;
+  gap: 4px;
+  margin-left: 10px;
+  flex-grow: 1;
+  overflow-x: auto;
+  max-width: calc(100vw - 250px);
+}
+
+.taskbar-app-btn {
+  max-width: 150px;
+  min-width: 100px;
+  justify-content: flex-start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 11px;
+}
+
+.taskbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: var(--font-sys);
+}
+
+.start-menu {
+  position: absolute;
+  bottom: 40px;
+  left: 6px;
+  width: 220px;
+  background-color: var(--win-bg);
+  z-index: 10001;
+  display: flex;
+  box-shadow: 3px -3px 10px rgba(0,0,0,0.3);
+}
+
+.start-menu-sidebar {
+  width: 32px;
+  background: linear-gradient(180deg, #000080, #1080d0);
+  color: var(--win-border-light);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+}
+
+.start-menu-sidebar-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+.start-menu-items {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0;
+}
+
+.start-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 13px;
+  color: var(--win-text);
+  cursor: pointer;
+  width: 100%;
+}
+
+.start-menu-item:hover {
+  background-color: var(--win-selected-bg);
+  color: var(--win-selected-text);
+}
+
+.start-menu-divider {
+  height: 1px;
+  background-color: var(--win-border-dark);
+  border-bottom: 1px solid var(--win-border-light);
+  margin: 4px 0;
+}
+
+/* ----------------------------------------------------
+   FORM ELEMENTS
+   ---------------------------------------------------- */
+
+.field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.field-row-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.label-retro {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.input-retro {
+  padding: 6px 8px;
+  font-size: 13px;
+  font-family: var(--font-sys);
+  outline: none;
+  color: var(--win-text);
+}
+
+.input-retro:focus {
+  outline: 1px dotted #000;
+  outline-offset: -3px;
+}
+
+/* ----------------------------------------------------
+   CHAT INTERFACE SPECIFICS
+   ---------------------------------------------------- */
+
+.chat-layout {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 8px;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Tab controls styling for room switching & DMs */
+.tabs-container {
+  display: flex; /* always visible */
+  flex-direction: row;
+  gap: 4px;
+  padding-left: 6px;
+  margin-top: 4px;
+  margin-bottom: -1px; /* slightly overlap outset pane borders */
+  z-index: 2;
+  position: relative;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox hide scrollbar */
+}
+
+.tabs-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari hide scrollbar */
+}
+
+@media (min-width: 601px) {
+  .desktop-hide {
+    display: none !important;
+  }
+}
+
+.tab-item {
+  background-color: var(--win-bg);
+  color: var(--win-text);
+  border: 2px solid;
+  border-top-color: var(--win-border-light);
+  border-left-color: var(--win-border-light);
+  border-right-color: var(--win-border-shadow);
+  border-bottom-color: transparent;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  outline: none;
+}
+
+.tab-item.inactive {
+  background-color: #d0d0d0;
+  border-bottom-color: var(--win-border-shadow);
+  margin-top: 2px;
+  padding-bottom: 2px;
+}
+
+.tab-item.inactive:hover {
+  background-color: #dfdfdf;
+}
+
+@media (max-width: 600px) {
+  .chat-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+  }
+  
+  .tabs-container {
+    display: flex;
+  }
+
+  .users-panel {
+    display: flex !important;
+    height: 100%;
+  }
+
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
+.chat-main-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.messages-list-wrapper {
+  flex-grow: 1;
+  margin-bottom: 8px;
+  padding: 10px;
+  overflow-y: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Message layout and outset bubbles */
+.message-item {
+  font-family: var(--font-sys);
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 85%;
+  margin-bottom: 2px;
+}
+
+.message-mine {
+  align-self: flex-end;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-align: right;
+}
+
+.message-others {
+  align-self: flex-start;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-align: left;
+}
+
+.message-item:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.message-item.highlighted {
+  animation: message-highlight-pulse 2s ease-out;
+  background-color: #ffffd0;
+  border-color: #c0c000;
+}
+
+@keyframes message-highlight-pulse {
+  0% { background-color: #ffff70; }
+  100% { background-color: transparent; }
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.message-sender {
+  font-weight: bold;
+  color: #000080;
+  cursor: pointer;
+}
+
+.message-sender:hover {
+  text-decoration: underline;
+}
+
+.message-time {
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  color: var(--win-border-dark);
+}
+
+.message-body {
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* Reply Styling */
+.message-reply-preview {
+  font-size: 11px;
+  color: #5a5a5a;
+  background-color: #ececec;
+  padding: 2px 6px;
+  border-left: 2px solid var(--win-border-dark);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.message-reply-preview:hover {
+  background-color: #e0e0e0;
+}
+
+.message-reply-btn {
+  background: none;
+  border: none;
+  color: var(--win-selected-bg);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0;
+  text-decoration: underline;
+  align-self: flex-start;
+  margin-top: 2px;
+  font-weight: bold;
+}
+
+.message-reply-btn:hover {
+  color: #1080d0;
+}
+
+.chat-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reply-active-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background-color: #e4e4e4;
+  font-size: 11px;
+}
+
+.reply-active-info {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.chat-input-row input {
+  flex-grow: 1;
+}
+
+/* Users List */
+.users-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 8px;
+}
+
+.users-panel-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--win-border-dark);
+}
+
+.users-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-list-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  font-size: 12px;
+}
+
+.user-online-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00ff00;
+  border-radius: 50%;
+  border: 1px solid #008000;
+}
+
+.user-offline-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #808080;
+  border-radius: 50%;
+  border: 1px solid #404040;
+}
+
+/* ----------------------------------------------------
+   CUSTOM RETRO WEBKIT SCROLLBARS
+   ---------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #dfdfdf;
+  /* Retro checkered track pattern */
+  background-image: radial-gradient(#c0c0c0 25%, transparent 25%),
+                    radial-gradient(#c0c0c0 25%, transparent 25%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--win-bg);
+  border: 2px solid;
+  border-top-color: var(--win-border-light);
+  border-left-color: var(--win-border-light);
+  border-right-color: var(--win-border-shadow);
+  border-bottom-color: var(--win-border-shadow);
+  box-shadow: inset 1px 1px 0px var(--win-border-light),
+              inset -1px -1px 0px var(--win-border-dark);
+}
+
+::-webkit-scrollbar-thumb:active {
+  border-top-color: var(--win-border-shadow);
+  border-left-color: var(--win-border-shadow);
+  border-right-color: var(--win-border-light);
+  border-bottom-color: var(--win-border-light);
+  box-shadow: inset 1px 1px 0px var(--win-border-dark);
+}
+
+/* ----------------------------------------------------
+   CRT RETRO DISPLAY FILTER
+   ---------------------------------------------------- */
+
+.crt-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-effect::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 99999;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+.crt-flicker {
+  animation: crt-flicker-animation 0.15s infinite;
+}
+
+@keyframes crt-flicker-animation {
+  0% { opacity: 0.992; }
+  50% { opacity: 1.0; }
+  100% { opacity: 0.995; }
+}
+
+/* Vignette border for CRT screen curvature simulation */
+.crt-vignette {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  z-index: 99998;
+}
+
+/* Solitaire / About retro decorations */
+.about-box {
+  display: flex;
+  gap: 16px;
+}
+
+.about-logo {
+  font-family: var(--font-pixel);
+  font-size: 36px;
+  background: var(--win-title-active-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 4px;
+}
+
+/* Start Menu Subtitle & clock styling */
+.digital-clock {
+  font-family: var(--font-monospace);
+  font-weight: bold;
+}
